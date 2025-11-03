@@ -11,8 +11,16 @@ public class Qes1_3 {
         System.out.print("ユーザー名を入力してください: ");
         String username = scanner.nextLine();
 
-        if (username == null || username.trim().isEmpty() || username.length() > 10 || !username.matches("[a-zA-Z0-9]+")) {
+        if (username == null || username.trim().isEmpty()) {
             System.out.println("名前を正しく入力してください");
+            scanner.close();
+            return;
+        }else if (username.length() > 10) {
+            System.out.println("名前が長すぎます。10文字以内で入力してください。");
+            scanner.close();
+            return;
+        } else if (!username.matches("[a-zA-Z0-9]+")) {
+            System.out.println("名前は半角英数字で入力してください。");
             scanner.close();
             return;
         }
@@ -53,6 +61,5 @@ public class Qes1_3 {
 
         System.out.println("勝つまでにかかった合計回数は" + count + "回です");
 
-        scanner.close();
 	}
 }

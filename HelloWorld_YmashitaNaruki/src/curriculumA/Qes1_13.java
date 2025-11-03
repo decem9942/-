@@ -27,71 +27,50 @@ public class Qes1_13 {
 		 doubleVar = 0.0;
 
 		 charVar = '\u0000'; 
-		 stringVar = "a"; 
+		 stringVar = "null"; 
 		
 		 booleanVar = false;
 		 
      // Qes3 初期化をしたそれぞれの変数に下記の値を代入してください
-		 byteVar = 0;
          byteVar = 10;
 
-         shortVar = 0;
          shortVar = 1000;
 
-         intVar = 0;
          intVar = 100000;
 
-         longVar = 0L;
          longVar = 10000000000L;
 
-         floatVar = 0.0f;
          floatVar = 3.14f;
 
-         doubleVar = 0.0;
          doubleVar = 2.71828;
 
-         charVar = '\u0000';
          charVar = 'A';
 
-         stringVar = "";
          stringVar = "こんにちは";
 
-         booleanVar = false;
          booleanVar = true;
          
          //Qes4  下記の通りにコンソール出力されるようにしてください
                //上記で作成した変数を必ず使用すること
-            byteVar = 10;
-	        shortVar = 1000;
-	        intVar = 100000;
-	        longVar = 10_000_000_000L;
+         System.out.println(byteVar + shortVar / 100 + intVar / 10000);
 
-	        floatVar = 3.14f;
-	        doubleVar = 2.71828;
+         // 2行目：20
+         System.out.println(byteVar * 2);
 
-	        charVar = 'a';
-	        stringVar = "ハロー";
+         // 3行目：a ハロー true
+         System.out.println((char)(charVar + 32) + " ハロー " + booleanVar);
 
-	        booleanVar = true;
+         // 4行目：11130
+         System.out.println(byteVar + shortVar / 100 + intVar / 10000 + 20);
 
-	        int sum1 = byteVar + shortVar + intVar; 
-	        System.out.println(sum1+sum1);
-	        
-	        int doubledByte = byteVar * 2;
-	        System.out.println(doubledByte+ doubledByte);
+         // 5行目：10000000000
+         System.out.println(longVar);
 
-	        System.out.println(charVar+stringVar+booleanVar+charVar+stringVar+booleanVar);
+         // 6行目：0.105
+         System.out.println(floatVar / 30);
 
-	        int sum2 = byteVar + shortVar + intVar + 120; 
-	        System.out.println(11130+11130+"数字を全て足す");
-
-	        System.out.println(String.format("%.0E", (double)longVar)+String.format("%.0E", (double)longVar)+ "小数点以外の数字を全てかける");
-
-	        double result = 10.5 / 100;
-	        System.out.println(result+result+"10.5割る100をする");
-
-	        int result2 = byteVar - 100;
-	        System.out.println(result2+result2 + "10引く100をする");
+         // 7行目：-90
+         System.out.println(byteVar * -9);
 	        
 	     //Qes5  次のプログラムを実行すると「ハローJAVA2023」という結果が表示されます。
 	          //「ハローJAVA43」と表示とさせたいのですが、意図通りに動きません。正しく動作するように修正してください。
