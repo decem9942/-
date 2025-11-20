@@ -4,7 +4,7 @@ public class Qes1_3 {
 	// Q1：引数に文字列型と整数型をいれて
 	// コンソールに「Hello JavaSE 11」と出力するメソッド
 	public static void printHello(String text, int number) {
-		System.out.println("Hello JavaSE " + number);
+		System.out.println(text + " " + number);
 	}
 
 	// Q2：３の倍数のときだけ true を返すメソッド
@@ -20,7 +20,7 @@ public class Qes1_3 {
 	public static void main(String[] args) {
 
 		// Q1 呼び出し
-		printHello("JavaSE", 11);
+		printHello("Hello JavaSE", 11);
 
 		// Q2 呼び出し
 		System.out.println(isMultipleOfThree(9)); // true
@@ -30,4 +30,3 @@ public class Qes1_3 {
 		greet("太郎");
 	}
 }
-
