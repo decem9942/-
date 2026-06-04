@@ -29,8 +29,4 @@ public class Animal {
 		return this.speed;
 	}
 
-	public static String[] split(String string) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 }

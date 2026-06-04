@@ -60,9 +60,4 @@ public class Hero extends Character {
 	public void setDefense(int defense) {
 		this.defense = defense;
 	}
-
-	public String getName() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
-	}
 }
