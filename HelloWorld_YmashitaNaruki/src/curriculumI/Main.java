@@ -55,7 +55,6 @@ public class Main {
 				System.out.println("ID" + id + "に対するデータはありません。\\n");
 			}
 
-			scanner.close();
 		}
 	}
 
