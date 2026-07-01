@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Expenses - Budget Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="container py-4">
+    <nav class="nav nav-tabs mb-4">
+        <a class="nav-link" href="/setup">Setup</a>
+        <a class="nav-link" href="/income">Income</a>
+        <a class="nav-link active" href="/expenses">Expenses</a>
+        <a class="nav-link" href="/summary">Summary</a>
+    </nav>
+    <h2>Expenses Tracker</h2>
+    
+    <form th:action="@{/expenses}" method="post" class="row g-3 my-3 p-3 bg-light rounded">
+        <input type="hidden" name="year" th:value="${currentYear}">
+        <div class="col-md-3">
+            <label class="form-label">Category</label>
+            <input type="text" name="category" class="form-control" placeholder="e.g., Food, Transport" required>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label">Subcategory</label>
+            <input type="text" name="subcategory" class="form-control" placeholder="e.g., Groceries" required>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Month</label>
+            <select name="month" class="form-select">
+                <option th:each="m : ${#numbers.sequence(1, 12)}" th:value="${m}" th:text="${m} + '月'"></option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <label class="form-label">Amount</label>
+            <input type="number" step="0.01" name="amount" class="form-control" required>
+        </div>
+        <div class="col-md-2 d-flex align-items-end">
+            <button type="submit" class="btn btn-danger w-100">Add Expense</button>
+        </div>
+    </form>
+
+    <table class="table table-striped mt-4">
+        <thead>
+            <tr>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Month</th>
+                <th>Amount</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="t : ${transactions}">
+                <td th:text="${t.category}"></td>
+                <td th:text="${t.subcategory}"></td>
+                <td th:text="${t.month} + '月'"></td>
+                <td th:text="${t.amount}"></td>
+                <td>
+                    <form th:action="@{/expenses/{id}/delete(id=${t.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
