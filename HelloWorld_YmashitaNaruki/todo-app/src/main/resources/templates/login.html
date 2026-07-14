@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ログイン</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background-color: #fcfcfc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            color: #222;
+        }
+        .login-container {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eaeaea;
+            box-sizing: border-box;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #222;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        input:focus {
+            border-color: #0d6efd;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            background-color: #0d6efd;
+            color: white;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            background-color: #0b5ed7;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 13px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>ログイン</h1>
+    
+    <div class="login-container">
+        <!-- 💡 ここを修正：送信先を POST の /login にしっかり向けます -->
+        <form th:action="@{/login}" method="post">
+            
+            <!-- ログインエラーメッセージ -->
+            <div th:if="${param.error}" class="error-message">
+                ユーザー名またはパスワードが違います。
+            </div>
+
+            <div class="form-group">
+                <label for="username">ユーザー名</label>
+                <!-- 💡 ユーザー登録画面から引き継いだ値を初期値（value）として自動セットします -->
+                <input type="text" id="username" name="username" th:value="${param.username}" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">パスワード</label>
+                <!-- 💡 パスワードも同様に初期値として自動セットします -->
+                <input type="password" id="password" name="password" th:value="${param.password}" required />
+            </div>
+
+            <button type="submit" class="btn-submit">ログイン</button>
+        </form>
+    </div>
+
+</body>
+</html>

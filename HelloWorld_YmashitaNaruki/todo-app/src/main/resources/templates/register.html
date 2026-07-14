@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー登録</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background-color: #fcfcfc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .register-container {
+            width: 100%;
+            max-width: 420px;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            border: 1px solid #eaeaea;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+            color: #222;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #222;
+        }
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        input:focus {
+            border-color: #198754;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.15);
+        }
+        .btn-submit {
+            width: 100%;
+            padding: 12px;
+            font-size: 14px;
+            font-weight: bold;
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+            background-color: #198754;
+            color: white;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+        .btn-submit:hover {
+            background-color: #157347;
+        }
+        .login-link {
+            font-size: 13px;
+            color: #0d6efd;
+            text-decoration: none;
+        }
+        .login-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <h1>ユーザ登録</h1>
+        
+        <!-- 元の動きの通り、GET送信でログイン画面（/login）にパラメータを引き継いで遷移させます -->
+        <form th:action="@{/login_register}" method="get">
+            <div class="form-group">
+                <label for="reg-username">ユーザ名（半角英字）</label>
+                <input type="text" id="reg-username" name="username" required />
+            </div>
+
+            <div class="form-group">
+                <label for="reg-password">パスワード（半角英数字）</label>
+                <input type="password" id="reg-password" name="password" required />
+            </div>
+
+            <button type="submit" class="btn-submit">登録</button>
+        </form>
+        
+        <a th:href="@{/login}" class="login-link">ログインはこちら</a>
+    </div>
+
+</body>
+</html>

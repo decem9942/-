@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>TODOアプリ TOP</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background-color: #fcfcfc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .top-container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 42px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: background-color 0.2s;
+        }
+        .btn-register {
+            background-color: #198754;
+        }
+        .btn-register:hover {
+            background-color: #157347;
+        }
+        .btn-login {
+            background-color: #0d6efd;
+        }
+        .btn-login:hover {
+            background-color: #0b5ed7;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-container">
+        <h1>TODOアプリ TOP</h1>
+        <div class="btn-container">
+            <a th:href="@{/register}" class="btn btn-register">ユーザ登録</a>
+            <a th:href="@{/login}" class="btn btn-login">ログイン</a>
+        </div>
+    </div>
+
+</body>
+</html>

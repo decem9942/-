@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>タスク一覧</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background-color: #fcfcfc;
+            margin: 0;
+            padding: 40px;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px; /* テーブル幅を広げる */
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 80px;
+        }
+        h1 {
+            font-size: 42px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 40px;
+            letter-spacing: 2px;
+        }
+        .user-info {
+            text-align: right;
+            font-size: 14px;
+            color: #6c757d;
+            margin-bottom: 15px;
+        }
+        
+        /* テーブルのスタイル（1枚目のイメージ） */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+            font-size: 14px;
+        }
+        th {
+            background-color: #1a252f; /* ダークグレーのヘッダー */
+            color: #ffffff;
+            font-weight: 600;
+        }
+        tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        /* ボタン類のスタイル */
+        .action-btns {
+            display: flex;
+            gap: 5px;
+        }
+        .btn {
+            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            display: inline-block;
+        }
+        .btn-edit { background-color: #0d6efd; }
+        .btn-edit:hover { background-color: #0b5ed7; }
+        .btn-delete { background-color: #dc3545; }
+        .btn-delete:hover { background-color: #bb2d3b; }
+        
+        /* 右下の緑の新規作成ボタン */
+        .btn-create-container {
+            text-align: right;
+            margin-top: 20px;
+        }
+        .btn-create {
+            background-color: #198754;
+            padding: 12px 24px;
+            font-size: 15px;
+            border-radius: 6px;
+        }
+        .btn-create:hover { background-color: #157347; }
+
+        .btn-logout {
+            background-color: #6c757d;
+            margin-bottom: 20px;
+        }
+        .btn-logout:hover { background-color: #5a6268; }
+
+        /* ページネーションの仮デザイン */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .pagination li {
+            margin: 0 2px;
+        }
+        .pagination a, .pagination span {
+            display: block;
+            padding: 8px 12px;
+            border: 1px solid #dee2e6;
+            color: #0d6efd;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 4px;
+        }
+        .pagination .active span {
+            background-color: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
+        .pagination .disabled span {
+            color: #6c757d;
+            background-color: #e9ecef;
+            border-color: #dee2e6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="user-info">
+            ログインユーザー: <strong th:text="${username}">ユーザー名</strong> さん
+            <a th:href="@{/logout}" class="btn btn-logout" style="padding: 4px 8px; margin-left: 10px;">ログアウト</a>
+        </div>
+
+        <h1>タスク一覧</h1>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>タイトル</th>
+                    <th>内容</th>
+                    <th>登録者</th>
+                    <th>開始日</th>
+                    <th>終了日</th>
+                    <th>作成日時</th>
+                    <th>更新日時</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="task : ${tasks}">
+                    <!-- ID（もしTaskモデルにidがあれば表示されます） -->
+                    <td th:text="${task.id}">105</td>
+                    <td th:text="${task.title}"></td>
+                    <td th:text="${task.content}"></td>
+                    <td th:text="${task.name}"></td>
+                    <td th:text="${task.startDate}"></td>
+                    <td th:text="${task.endDate}"></td>
+                    <!-- 日時（モデルに定義がない場合は空欄になります） -->
+                    <td th:text="${task.createdAt != null ? task.createdAt : '----' }"></td>
+                    <td th:text="${task.updatedAt != null ? task.updatedAt : '----' }"></td>
+                    <td>
+                        <div class="action-btns">
+                            <a th:href="@{/edit/{id}(id=${task.id})}" class="btn btn-edit">編集</a>
+                            <!-- 削除ボタン（仮リンク） -->
+                            <a th:href="@{/tasks/delete/{id}(id=${task.id})}" class="btn btn-delete" onclick="return confirm('本当に削除しますか？')">削除</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(tasks)}">
+                    <td colspan="9" style="text-align: center; color: #999;">タスクがありません。新しいタスクを追加してください。</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- ページネーション（見た目だけ配置） -->
+        <ul class="pagination">
+            <li class="disabled"><span>« 前</span></li>
+            <li class="active"><span>1</span></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">次 »</a></li>
+        </ul>
+
+        <!-- 右下の緑の新規作成ボタン -->
+        <div class="btn-create-container">
+            <a th:href="@{/tasks/new}" class="btn btn-create">+ 新規作成</a>
+        </div>
+    </div>
+
+</body>
+</html>
